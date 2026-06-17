@@ -13,6 +13,7 @@ export interface IUser {
     role: string;
     isActive: boolean;
     isDeleted: boolean;
+    plan: string;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -25,6 +26,7 @@ const userSchema = new mongoose.Schema({
     role: { type: String, default: utils.appConstant.USER_ROLE.USER },
     isActive: { type: Boolean, default: true },
     isDeleted: { type: Boolean, default: false },
+    plan: { type: String, default: utils.appConstant.USER_PLAN.FREE },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
 });
