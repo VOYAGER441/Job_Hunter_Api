@@ -18,29 +18,29 @@ export interface IRemoteOKJob {
 
 
 
-interface MuseJobLocation {
+interface IMuseJobLocation {
   name: string;
 }
 
-interface MuseJobCategory {
+interface IMuseJobCategory {
   name: string;
 }
 
-interface MuseJobLevel {
-  name: string;
-  short_name: string;
-}
-
-interface MuseJobTag {
+interface IMuseJobLevel {
   name: string;
   short_name: string;
 }
 
-interface MuseJobRefs {
+interface IMuseJobTag {
+  name: string;
+  short_name: string;
+}
+
+interface IMuseJobRefs {
   landing_page: string;
 }
 
-interface MuseJobCompany {
+interface IMuseJobCompany {
   id: number;
   short_name: string;
   name: string;
@@ -54,15 +54,15 @@ export interface IMuseJob {
   short_name: string;
   model_type: string; // e.g. "jobs"
   id: number;
-  locations: MuseJobLocation[];
-  categories: MuseJobCategory[];
-  levels: MuseJobLevel[];
-  tags: MuseJobTag[];
-  refs: MuseJobRefs;
-  company: MuseJobCompany;
+  locations: IMuseJobLocation[];
+  categories: IMuseJobCategory[];
+  levels: IMuseJobLevel[];
+  tags: IMuseJobTag[];
+  refs: IMuseJobRefs;
+  company: IMuseJobCompany;
 }
 
-export interface MuseJobsApiResponse {
+export interface IMuseJobsApiResponse {
   page: number;
   page_count: number;
   items_per_page: number;

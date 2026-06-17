@@ -1,3 +1,4 @@
+import { IMuseJob, INormalizedJob, IRemoteOKJob } from "@/interface/response/jobs.response";
 import { ObjectId } from "mongodb";
 import { v4 as uuidv4 } from "uuid";
 
@@ -29,7 +30,7 @@ export function generateAvatarUrl(name: string): string {
 }
 
 
-export function fromRemoteOK(job: RemoteOKJob): NormalizedJob {
+export function fromRemoteOK(job: IRemoteOKJob): INormalizedJob {
   return {
     id: job.id,
     source: "remoteok",
@@ -45,7 +46,7 @@ export function fromRemoteOK(job: RemoteOKJob): NormalizedJob {
   };
 }
 
-export function fromMuse(job: MuseJob): NormalizedJob {
+export function fromMuse(job: IMuseJob): INormalizedJob {
   return {
     id: String(job.id),
     source: "muse",

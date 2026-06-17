@@ -2,8 +2,7 @@
 import * as http from "./http";
 import * as commonUnit from "./commonUnit";
 import * as cacheConstant from "./cacheConstant";
-import * as appConstant from "./appConstant";
-import { SafetyCheck } from "./safety";
+import * as appConstant from "./appConstant";;
 import * as jwtOperation from "./jwtOperation";
 
 export default {
@@ -11,6 +10,5 @@ export default {
   commonUnit,
   cacheConstant,
   appConstant,
-  SafetyCheck,
   jwtOperation,
 };

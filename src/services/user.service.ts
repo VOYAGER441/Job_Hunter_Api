@@ -1,6 +1,6 @@
 import { IUserCreateRequest } from "@/interface/request/user.request";
 import { IUserResponse } from "@/interface/response/user.response";
-import userModels from "@/models/user.models";
+import userModels from "@/models/user.model";
 import utils from "@/utils";
 import { Log } from "@/utils/logger";
 
