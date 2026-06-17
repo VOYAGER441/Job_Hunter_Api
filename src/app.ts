@@ -1,0 +1,65 @@
+import express, { Request, Response, NextFunction } from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import bodyParser from "body-parser";
+import env from "@/environment";
+import utils from "@/utils";
+import router from "./routes";
+import { globalErrorHandler } from "@/error/globalErrorHandler";
+import { Log } from "./utils/logger";
+import DATABASE from "@/database/database";
+
+
+dotenv.config();
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+
+// public routes
+// ####################################
+app.get('/', async (req: Request, res: Response) => {
+    // Remove unused parameter warning by using req or underscore prefix
+    // This prevents the unused parameter warning
+    res.status(utils.http.HttpStatusCodes.OK).send("Hello World From Job Hunter API");
+})
+
+
+
+
+// api routes entry point
+// ####################################
+app.use('/v2', router)
+// ####################################
+
+// 404 handler - must be after all other routes
+// ####################################
+app.use((req: Request, res: Response, next: NextFunction) => {
+    res.status(utils.http.HttpStatusCodes.NOT_FOUND).json({
+        success: false,
+        message: 'Route not found',
+        error: {
+            path: req.originalUrl,
+            method: req.method,
+            message: 'The requested resource was not found'
+        }
+    });
+});
+
+// Global error handler - must be after all routes and middleware
+// ####################################
+app.use(globalErrorHandler);
+
+const startServer = async () => {
+    const database = new DATABASE();
+    await database.init();
+
+    app.listen(env.PORT, () => {
+        Log.info(`Server is running on port ${env.PORT}`);
+    });
+};
+
+startServer().catch((error) => {
+    Log.error("Failed to start server:", error);
+    process.exit(1);
+});
