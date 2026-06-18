@@ -22,14 +22,10 @@ export const APPWRITE_ENDPOINT = process.env.APPWRITE_ENDPOINT;
 export const APPWRITE_PROJECT_ID = process.env.APPWRITE_PROJECT_ID;
 export const APPWRITE_API_KEY = process.env.APPWRITE_API_KEY;
 
-// NVIDIA API key
-export const NVIDIA_API_KEY = process.env.NVIDIA_API_KEY;
-export const NVIDIA_AI_MODEL = process.env.NVIDIA_AI_MODEL;
-export const BASE_URL = process.env.BASE_URL;
-export const TEMPERATURE = Number(process.env.TEMPERATURE) || 0.2;
-export const TOP_P = Number(process.env.TOP_P) || 0.7;
-export const MAX_TOKENS = Number(process.env.MAX_TOKENS) || 2048;
-
+export const REDIS_HOST=process.env.REDIS_HOST || 'redis';
+export const REDIS_PORT=process.env.REDIS_PORT || 6379;
+export const REDIS_PASSWORD=process.env.REDIS_PASSWORD || 'your_redis_password';
+export const REDIS_DB=process.env.REDIS_DB || 0;
 // jwt
 export const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key";
 export const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
