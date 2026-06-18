@@ -1,3 +1,5 @@
+import { JOB_SOURCE } from "@/utils/appConstant";
+
 export interface IRemoteOKJob {
   slug: string;
   id: string;
@@ -74,7 +76,7 @@ export interface IMuseJobsApiResponse {
 
 export interface INormalizedJob {
   id: string; // cast Muse's number to string
-  source: "remoteok" | "muse";
+  source: JOB_SOURCE;
   title: string;
   company: string;
   description: string; // HTML

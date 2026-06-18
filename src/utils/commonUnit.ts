@@ -1,6 +1,7 @@
 import { IMuseJob, INormalizedJob, IRemoteOKJob } from "@/interface/response/jobs.response";
 import { ObjectId } from "mongodb";
 import { v4 as uuidv4 } from "uuid";
+import { JOB_SOURCE } from "./appConstant";
 
 export const toString = (str: any) => {
     const result = str + "";
@@ -33,7 +34,7 @@ export function generateAvatarUrl(name: string): string {
 export function fromRemoteOK(job: IRemoteOKJob): INormalizedJob {
   return {
     id: job.id,
-    source: "remoteok",
+    source: JOB_SOURCE.REMOTEOK,
     title: job.position,
     company: job.company,
     description: job.description,
@@ -49,7 +50,7 @@ export function fromRemoteOK(job: IRemoteOKJob): INormalizedJob {
 export function fromMuse(job: IMuseJob): INormalizedJob {
   return {
     id: String(job.id),
-    source: "muse",
+    source: JOB_SOURCE.MUSE,
     title: job.name,
     company: job.company.name,
     description: job.contents,
@@ -58,4 +59,9 @@ export function fromMuse(job: IMuseJob): INormalizedJob {
     publishedAt: job.publication_date,
     applyUrl: job.refs.landing_page,
   };
+}
+
+export function sh256Convert(str: string): string {
+    const crypto = require("crypto");
+    return crypto.createHash("sha256").update(str).digest("hex");
 }

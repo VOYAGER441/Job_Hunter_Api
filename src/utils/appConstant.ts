@@ -37,3 +37,9 @@ export enum ORDER_STATUS {
    FAILED = "failed",
    CANCELLED = "cancelled"
 }
+
+// ####################### job source ########################
+export enum JOB_SOURCE {
+   REMOTEOK = "remoteok",
+   MUSE = "muse"
+}

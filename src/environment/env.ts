@@ -26,7 +26,12 @@ export const REDIS_HOST=process.env.REDIS_HOST || 'redis';
 export const REDIS_PORT=process.env.REDIS_PORT || 6379;
 export const REDIS_PASSWORD=process.env.REDIS_PASSWORD || 'your_redis_password';
 export const REDIS_DB=process.env.REDIS_DB || 0;
+
 // jwt
 export const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key";
 export const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
 export const JWT_REFRESH_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || "30d";
+
+// job sources
+export const THEMUSE_API_URL = process.env.THEMUSE_API_URL;
+export const REMOTEOK_API_URL = process.env.REMOTEOK_API_URL;
