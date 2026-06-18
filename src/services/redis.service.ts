@@ -274,8 +274,8 @@ class RedisService {
     return result === 1;
   }
 
-  async expire(key: string, ttlSeconds: number): Promise<boolean> {
-    this.log("expire");
+  async addTtl(key: string, ttlSeconds: number): Promise<boolean> {
+    this.log("addTtl");
     const result = await this.client.expire(key, ttlSeconds);
     return result === 1;
   }
