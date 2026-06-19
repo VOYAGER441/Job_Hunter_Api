@@ -30,6 +30,10 @@ router.use("/auth", AuthRouter);
 
 // user routes
 // ###############################################
+// jo=b routes
 router.use("/jobs", JobSRouter);
+
+// resource routes
+
 
 export default router;
