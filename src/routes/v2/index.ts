@@ -1,6 +1,7 @@
 import express from "express";
 import AuthRouter from "./auth.routes";
 import JobSRouter from "./jobs.routes";
+import ResumeRouter from "./resume.routes";
 
 
 const router= express.Router();
@@ -34,6 +35,6 @@ router.use("/auth", AuthRouter);
 router.use("/jobs", JobSRouter);
 
 // resource routes
-
+router.use("/resumes", ResumeRouter);
 
 export default router;

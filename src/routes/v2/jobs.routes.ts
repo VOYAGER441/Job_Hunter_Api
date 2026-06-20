@@ -8,7 +8,6 @@ const router = express.Router();
 // for jobs
 // ###############################################
 /**
- * @openapi
  * /jobs
  * get all jobs
  */

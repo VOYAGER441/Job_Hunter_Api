@@ -2,7 +2,7 @@ import { NODE_ENVS } from "@/utils/appConstant";
 
 // app url
 export const APP_URL = process.env.APP_URL;
-
+export const RESUME_SERVER_URL = process.env.RESUME_SERVER_URL;
 // env
 export const NODE_ENV = process.env.NODE_ENV || 'dev' as NODE_ENVS;
 
@@ -22,10 +22,10 @@ export const APPWRITE_ENDPOINT = process.env.APPWRITE_ENDPOINT;
 export const APPWRITE_PROJECT_ID = process.env.APPWRITE_PROJECT_ID;
 export const APPWRITE_API_KEY = process.env.APPWRITE_API_KEY;
 
-export const REDIS_HOST=process.env.REDIS_HOST || 'redis';
-export const REDIS_PORT=process.env.REDIS_PORT || 6379;
-export const REDIS_PASSWORD=process.env.REDIS_PASSWORD || 'your_redis_password';
-export const REDIS_DB=process.env.REDIS_DB || 0;
+export const REDIS_HOST = process.env.REDIS_HOST || 'redis';
+export const REDIS_PORT = process.env.REDIS_PORT || 6379;
+export const REDIS_PASSWORD = process.env.REDIS_PASSWORD || 'your_redis_password';
+export const REDIS_DB = process.env.REDIS_DB || 0;
 
 // jwt
 export const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key";
