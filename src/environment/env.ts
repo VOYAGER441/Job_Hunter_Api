@@ -3,6 +3,7 @@ import { NODE_ENVS } from "@/utils/appConstant";
 // app url
 export const APP_URL = process.env.APP_URL;
 export const RESUME_SERVER_URL = process.env.RESUME_SERVER_URL;
+export const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 // env
 export const NODE_ENV = process.env.NODE_ENV || 'dev' as NODE_ENVS;
 

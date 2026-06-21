@@ -59,8 +59,8 @@ class AppwriteService {
 
         const cleanAppUrl = appUrl.endsWith("/") ? appUrl.slice(0, -1) : appUrl;
 
-        let success = `${cleanAppUrl}/v1/auth/oauth/callback`;
-        let failure = `${cleanAppUrl}/v1/auth/oauth/callback`;
+        let success = `${cleanAppUrl}/v2/auth/oauth/callback`;
+        let failure = `${cleanAppUrl}/v2/auth/oauth/callback`;
 
         if (redirectUri) {
             const encodedRedirect = encodeURIComponent(redirectUri);

@@ -16,6 +16,7 @@ export interface IUser {
     plan: string;
     resumeCount: number;
     autoApplyCount: number;
+    totalCredits: number;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -31,9 +32,10 @@ const userSchema = new mongoose.Schema({
     plan: { type: String, default: utils.appConstant.USER_PLAN.FREE },
     resumeCount: { type: Number, default: 0 },
     autoApplyCount: { type: Number, default: 0 },
+    totalCredits: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-});
+}, { versionKey: false });
 
 class UserModel extends Models {
     constructor() {
