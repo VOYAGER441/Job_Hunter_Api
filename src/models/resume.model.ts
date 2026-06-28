@@ -107,7 +107,7 @@ const ResumeSchema = new mongoose.Schema<IResume>(
     education: { type: [EducationSchema], default: [] },
     experience: { type: [ExperienceSchema], default: [] },
   },
-  { timestamps: true }
+  { timestamps: true ,versionKey: false}
 );
 
 class ResumeModel extends Models {

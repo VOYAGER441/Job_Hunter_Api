@@ -40,6 +40,12 @@ export enum ORDER_STATUS {
 
 // ####################### job source ########################
 export enum JOB_SOURCE {
-   REMOTEOK = "remoteok",
-   MUSE = "muse"
+  REMOTEOK   = "remoteok",
+  THEMUSE    = "themuse",
+  ARBEITNOW  = "arbeitnow",
+  GRAPHQL_JOBS = "graphql_jobs",
+  AI_DEV_JOBS  = "ai_dev_jobs",
+  ADZUNA     = "adzuna",
+  FINDWORK   = "findwork",
+  USAJOBS    = "usajobs",
 }

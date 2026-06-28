@@ -1,6 +1,7 @@
 import express from "express";
 import { apiErrorHandler } from "@/error/apiErrorHandler";
 import resumeController from "@/controllers/v2/resume.controller";
+import authMiddleware from "@/middleware/auth.middleware";
 const router = express.Router();
 
 
@@ -10,6 +11,19 @@ const router = express.Router();
 /**
  * 
  */
-router.post("/create", apiErrorHandler(resumeController.createResume));
+// Build Resume
+router.post("/build", authMiddleware.authenticate, apiErrorHandler(resumeController.buildResume));
+
+//  create Resume
+router.post("/create", authMiddleware.authenticate, apiErrorHandler(resumeController.createResume));
+
+// get Resume by id
+router.get("/get", authMiddleware.authenticate, apiErrorHandler(resumeController.getResumeById));
+
+// get Resume by user
+router.get("/resumeByUser", authMiddleware.authenticate, apiErrorHandler(resumeController.getResumeByUser));
+
+// router.put("/update/:id", apiErrorHandler(resumeController.updateResume));
+// router.delete("/delete/:id", apiErrorHandler(resumeController.deleteResume));
 
 export default router;

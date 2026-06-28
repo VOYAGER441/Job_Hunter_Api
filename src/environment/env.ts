@@ -36,3 +36,16 @@ export const JWT_REFRESH_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || "30d
 // job sources
 export const THEMUSE_API_URL = process.env.THEMUSE_API_URL;
 export const REMOTEOK_API_URL = process.env.REMOTEOK_API_URL;
+export const ARBEITNOW_API_URL = process.env.ARBEITNOW_API_URL;
+export const GRAPHQL_JOBS_API_URL = process.env.GRAPHQL_JOBS_API_URL;
+export const AI_DEV_JOBS_API_URL = process.env.AI_DEV_JOBS_API_URL;
+export const ADZUNA_API_URL = process.env.ADZUNA_API_URL;
+export const FINDWORK_API_URL = process.env.FINDWORK_API_URL;
+
+
+
+
+// Tier A — keys required
+export const ADZUNA_APP_ID = process.env.ADZUNA_APP_ID
+export const ADZUNA_API_KEY = process.env.ADZUNA_API_KEY
+export const FINDWORK_API_KEY = process.env.FINDWORK_API_KEY

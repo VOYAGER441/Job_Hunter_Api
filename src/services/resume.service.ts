@@ -6,20 +6,24 @@ import env from "@/environment";
 import userModel from "@/models/user.model";
 import { AppError } from "@/error/AppError";
 import utils from "@/utils";
+import { IResumeCreateRequest } from "@/interface/request/resume.request";
+import userService from "./user.service";
 
 class ResumeService {
-    async createResume(userId: string): Promise<Buffer> {
-        Log.info("ResumeService::::createResume:::: called");
+    
+    // build resume
+    async buildResume(userId: mongoose.Types.ObjectId): Promise<Buffer> {
+        Log.info("ResumeService::::buildResume:::: called");
         const resumeDoc = await resumeModel
             .getDBModel()
             .findOne<IResume>({ userId }, { _id: 1 });
 
         if (!resumeDoc) {
-            Log.warn("ResumeService::::createResume:::: no resume data found for userId: " + userId);
+            Log.warn("ResumeService::::buildResume:::: no resume data found for userId: " + userId);
             throw new AppError("No resume data found for this user", utils.http.HttpStatusCodes.NOT_FOUND);
         }
 
-        Log.info("ResumeService::::createResume:::: resumeDoc " + JSON.stringify(resumeDoc._id))
+        Log.info("ResumeService::::buildResume:::: resumeDoc " + JSON.stringify(resumeDoc._id))
 
         try {
             const response = await axios.get<ArrayBuffer>(
@@ -29,17 +33,54 @@ class ResumeService {
 
             // update the resume counter in the database in user db 
             if (response.status === 200) {
-                Log.info("ResumeService::::createResume:::: resume generated successfully for userId: " + userId);
+                Log.info("ResumeService::::buildResume:::: resume generated successfully for userId: " + userId);
                 await userModel.getDBModel().findByIdAndUpdate(userId, { $inc: { resumeCount: 1 } }); // increment resumeCount by 1
             }
 
-            Log.info("ResumeService::::createResume:::: resume buffer created successfully for userId: " + userId);
+            Log.info("ResumeService::::buildResume:::: resume buffer created successfully for userId: " + userId);
             return Buffer.from(response.data);
         } catch (error) {
-            Log.error("ResumeService::::createResume:::: error for userId: " + userId, error);
+            Log.error("ResumeService::::buildResume:::: error for userId: " + userId, error);
             throw new AppError("Error occurred while creating resume", utils.http.HttpStatusCodes.INTERNAL_SERVER_ERROR);
         }
     }
+
+    // get resume by id
+    async getResumeById(resumeId: mongoose.Types.ObjectId): Promise<IResume> {
+        Log.info("ResumeService::::getResumeById:::: called");
+        const resumeDoc = await resumeModel.getDBModel().findById<IResume>({ _id: resumeId });
+        if (!resumeDoc) {
+            Log.warn("ResumeService::::getResumeById:::: no resume data found for id: " + resumeId);
+            throw new AppError("No resume data found for this id", utils.http.HttpStatusCodes.NOT_FOUND);
+        }
+        return resumeDoc;
+    }
+   
+    // get resume by user id
+    async getResumeByUser(userId: mongoose.Types.ObjectId): Promise<IResume> {
+        Log.info("ResumeService::::getResumeByUser:::: called");
+        const resumeDoc = await resumeModel.getDBModel().findOne<IResume>({ userId });
+        if (!resumeDoc) {
+            Log.warn("ResumeService::::getResumeByUser:::: no resume data found for userId: " + userId);
+            throw new AppError("No resume data found for this user", utils.http.HttpStatusCodes.NOT_FOUND);
+        }
+        return resumeDoc;
+    }
+
+    // create resume
+    async createResume(resumeData: IResumeCreateRequest): Promise<IResume> {
+        Log.info("ResumeService::::createResume:::: called");
+        const user =await userService.getUserById(utils.commonUnit.stringToObjectId(resumeData.userId));
+        if (!user) {
+            Log.warn("ResumeService::::createResume:::: no user found for userId: " + resumeData.userId);
+            throw new AppError("No user found for this userId", utils.http.HttpStatusCodes.NOT_FOUND);
+        }
+        Log.info("ResumeService::::createResume:::: user found for userId: " + resumeData.userId);
+        const resumeDoc = await resumeModel.getDBModel().create(resumeData); 
+        Log.info("ResumeService::::createResume:::: resume created successfully for userId: " + resumeData.userId);
+        return resumeDoc;
+    }
+
 }
 
 export default new ResumeService();
