@@ -13,7 +13,9 @@ class ResumeController {
     // build resume
     async buildResume(req: Request, res: Response) {
         Log.info("ResumeController::::buildResume:::: called");
-        const { userId } = req.body;
+        const user: IJwtRequest = (req as any).user; // assuming auth middleware attaches user to req
+        const userId = user.userId;
+
 
         if (!userId) {
             Log.error("ResumeController::::buildResume:::: userId is required");
@@ -21,8 +23,30 @@ class ResumeController {
         }
 
         Log.info("ResumeController::::buildResume:::: userId is valid");
-        const resumeBuffer = await resumeService.buildResume(utils.commonUnit.stringToObjectId(userId));
+        const resume = await resumeService.buildResume(utils.commonUnit.stringToObjectId(userId));
         Log.info("ResumeController::::buildResume:::: resume created successfully");
+        // res.set({
+        //     "Content-Type": "application/pdf",
+        //     "Content-Disposition": 'attachment; filename="resume.pdf"',
+        //     "Content-Length": resumeBuffer.length,
+        // });
+        res.status(utils.http.HttpStatusCodes.OK).send(resume);
+    }
+
+    async finalBuildResume(req: Request, res: Response) {
+        Log.info("ResumeController::::finalBuildResume:::: called");
+        const user: IJwtRequest = (req as any).user; // assuming auth middleware attaches user to req
+        const userId = user.userId;
+        const htmlData = req.body.htmlData;
+
+        if (!userId) {
+            Log.error("ResumeController::::finalBuildResume:::: userId is required");
+            return res.status(utils.http.HttpStatusCodes.BAD_REQUEST).json({ message: "userId is required" });
+        }
+
+        Log.info("ResumeController::::finalBuildResume:::: userId is valid");
+        const resumeBuffer = await resumeService.finalBuildResume(utils.commonUnit.stringToObjectId(userId), htmlData);
+        Log.info("ResumeController::::finalBuildResume:::: resume created successfully");
         res.set({
             "Content-Type": "application/pdf",
             "Content-Disposition": 'attachment; filename="resume.pdf"',

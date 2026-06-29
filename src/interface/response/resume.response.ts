@@ -31,6 +31,8 @@ export interface IExperience {
 export interface IResumeResponse {
     id: string; // optional for create, required for update
     userId: string; // reference to IUser
+    fileKey: string; // S3 object key for the resume PDF
+    publicUrl: string; // Public URL for the resume PDF
     name: string;
     phNumber: string;
     emailId: string;

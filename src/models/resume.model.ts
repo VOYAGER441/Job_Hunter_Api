@@ -34,6 +34,8 @@ export interface IExperience {
 export interface IResume {
   _id: mongoose.Types.ObjectId;
   userId: mongoose.Types.ObjectId; // reference to IUser
+  fileKey: string; // S3 object key for the resume PDF
+  publicUrl: string; // Public URL for the resume PDF
   name: string;
   phNumber: string;
   emailId: string;
@@ -95,6 +97,8 @@ const ResumeSchema = new mongoose.Schema<IResume>(
       required: true,
       index: true,
     },
+    fileKey: { type: String, default:"" }, // S3 object key for the resume PDF
+    publicUrl: { type: String, default:"" }, // Public URL for the resume PDF
     name: { type: String, required: true },
     phNumber: { type: String, required: true },
     emailId: { type: String, required: true },
@@ -107,7 +111,7 @@ const ResumeSchema = new mongoose.Schema<IResume>(
     education: { type: [EducationSchema], default: [] },
     experience: { type: [ExperienceSchema], default: [] },
   },
-  { timestamps: true ,versionKey: false}
+  { timestamps: true }
 );
 
 class ResumeModel extends Models {

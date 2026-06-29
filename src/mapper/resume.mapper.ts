@@ -6,6 +6,8 @@ const mapResumeToResumeResponse = (resume: IResume): IResumeResponse => {
         id: resume._id.toString(),
         userId: resume.userId.toString(),
         name: resume.name,
+        fileKey: resume.fileKey,
+        publicUrl: resume.publicUrl,
         phNumber: resume.phNumber,
         emailId: resume.emailId,
         portfolioLink: resume.portfolioLink,

@@ -12,7 +12,9 @@ const router = express.Router();
  * 
  */
 // Build Resume
-router.post("/build", authMiddleware.authenticate, apiErrorHandler(resumeController.buildResume));
+router.post("/build", authMiddleware.authenticate, apiErrorHandler(resumeController.buildResume))
+;
+router.put("/finalBuild", authMiddleware.authenticate, apiErrorHandler(resumeController.finalBuildResume));
 
 //  create Resume
 router.post("/create", authMiddleware.authenticate, apiErrorHandler(resumeController.createResume));
