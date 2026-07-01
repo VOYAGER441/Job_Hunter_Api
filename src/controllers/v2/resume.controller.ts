@@ -39,6 +39,9 @@ class ResumeController {
         const userId = user.userId;
         const htmlData = req.body.htmlData;
 
+        // console.log(req.body);
+        
+
         if (!userId) {
             Log.error("ResumeController::::finalBuildResume:::: userId is required");
             return res.status(utils.http.HttpStatusCodes.BAD_REQUEST).json({ message: "userId is required" });

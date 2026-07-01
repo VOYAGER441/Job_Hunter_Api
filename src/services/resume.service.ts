@@ -47,7 +47,10 @@ class ResumeService {
         const resumeDoc = await this.getResumeByUser(userId);
         Log.info("ResumeService::::finalBuildResume:::: resumeDoc " + JSON.stringify(resumeDoc._id))
         try {
-            const response = await axios.post<ArrayBuffer>(`${env.RESUME_SERVER_URL}/v2/resume/generateAndStore/${resumeDoc._id}`);
+
+         Log.debug("ResumeService::::finalBuildResume:::: sending request to resume server for userId: " + userId + " with htmlData: " + htmlData.length);
+            
+            const response = await axios.post<ArrayBuffer>(`${env.RESUME_SERVER_URL}/v2/resume/generateAndStore/${resumeDoc._id}`,  {htmlData} );
 
             // update the resume counter in the database in user db 
             if (response.status === 200) {

@@ -23,7 +23,7 @@ class AuthMiddleware {
                 res.status(401).json({ message: "Authentication token is required" });
                 return;
             }
-
+            
             const decoded = verifyAccessToken(token);
 
             // attach decoded user to request for downstream handlers
