@@ -29,6 +29,11 @@ export enum USER_PLAN {
    PRO_MAX = "pro_max"
 }
 
+export enum PLAN_CREDITS {
+   FREE = 10,
+   PRO = 100,
+   PRO_MAX = 500
+}
 // ####################### order ########################
 
 export enum ORDER_STATUS {
