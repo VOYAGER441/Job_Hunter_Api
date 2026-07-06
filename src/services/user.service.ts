@@ -1,8 +1,10 @@
+import { AppError } from "@/error/AppError";
 import { IUserCreateRequest } from "@/interface/request/user.request";
 import { IUserResponse } from "@/interface/response/user.response";
-import userModels from "@/models/user.model";
+import userModels, { IUser } from "@/models/user.model";
 import utils from "@/utils";
 import { Log } from "@/utils/logger";
+import mongoose from "mongoose";
 
 
 class UserService {
@@ -41,7 +43,17 @@ class UserService {
         return user;
     }
 
-    // create user
+    // get user by id
+    async getUserById(id: mongoose.Types.ObjectId): Promise<IUser | null> {
+        Log.info(`UserService:::getUserById:::: id ${id}`);
+        const user = await userModels.findOne({ _id: id });
+        if (!user) {
+            Log.info(`UserService:::getUserById:::: no user found for id ${id}`);
+            throw new AppError("User not found", utils.http.HttpStatusCodes.NOT_FOUND);
+        }
+        Log.info(`UserService:::getUserById:::: user ${user}`);
+        return user;
+    }    // create user
     async createUser(data: IUserCreateRequest): Promise<IUserResponse> {
         Log.info(`UserService:::createUser:::: creating user for appwriteId ${data.appwriteId}`);
 

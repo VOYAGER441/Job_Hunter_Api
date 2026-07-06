@@ -7,6 +7,7 @@ import { Log } from "@/utils/logger";
 import validations from "@/validations";
 import appwriteService from "@/services/appwrite.service";
 import { Request, Response } from "express";
+import env from "@/environment";
 
 class AuthController {
 
@@ -44,7 +45,7 @@ class AuthController {
         // Determine the base schema/URL
         // If frontend sent a specific redirectUri (e.g. exp://...), use it
         // Otherwise default to the production scheme (sheild://)
-        let deepLinkBase = "sheild://oauth/success";
+        let deepLinkBase = `${env.FRONTEND_URL}/oauth/callback`;
         if (redirectUri) {
             deepLinkBase = decodeURIComponent(redirectUri as string);
         }
@@ -56,25 +57,7 @@ class AuthController {
         Log.info("AuthController:::oauthCallback:::: redirecting to deep link", deepLink);
 
         // Return an HTML page that redirects
-        res.send(`
-            <!DOCTYPE html>
-            <html>
-                <head>
-                    <title>Redirecting...</title>
-                    <script>
-                        window.onload = function() {
-                            window.location.href = "${deepLink}";
-                        };
-                    </script>
-                </head>
-                <body style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif;">
-                    <div style="text-align: center;">
-                        <p>Redirecting back to App...</p>
-                        <a href="${deepLink}" style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">Click here if not redirected</a>
-                    </div>
-                </body>
-            </html>
-        `);
+        res.redirect(deepLink);
     }
 
     async logout(req: Request, res: Response) {

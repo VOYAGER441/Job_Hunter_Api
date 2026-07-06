@@ -4,3 +4,6 @@ node_modules
 logs
 
 /dist
+/data
+# Added by code-review-graph
+.code-review-graph/

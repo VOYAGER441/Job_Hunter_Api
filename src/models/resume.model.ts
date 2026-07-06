@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import Models from "./model";
+import collections from "@/database/collections";
 
 export interface IProject {
   projectName: string;
@@ -32,6 +34,8 @@ export interface IExperience {
 export interface IResume {
   _id: mongoose.Types.ObjectId;
   userId: mongoose.Types.ObjectId; // reference to IUser
+  fileKey: string; // S3 object key for the resume PDF
+  publicUrl: string; // Public URL for the resume PDF
   name: string;
   phNumber: string;
   emailId: string;
@@ -46,3 +50,74 @@ export interface IResume {
   createdAt: Date;
   updatedAt: Date;
 }
+
+const ProjectSchema = new mongoose.Schema<IProject>(
+  {
+    projectName: { type: String, required: true },
+    description: { type: String },
+    techStack: { type: [String], default: [] },
+    projectLink: { type: String },
+    githubLink: { type: String },
+    startDate: { type: Date },
+    endDate: { type: Date },
+  },
+  { _id: false }
+);
+
+const EducationSchema = new mongoose.Schema<IEducation>(
+  {
+    instituteName: { type: String, required: true },
+    degree: { type: String, required: true },
+    fieldOfStudy: { type: String },
+    startDate: { type: Date },
+    endDate: { type: Date },
+    grade: { type: String },
+  },
+  { _id: false }
+);
+
+const ExperienceSchema = new mongoose.Schema<IExperience>(
+  {
+    companyName: { type: String, required: true },
+    designation: { type: String, required: true },
+    startDate: { type: Date, required: true },
+    endDate: { type: Date },
+    isCurrent: { type: Boolean, default: false },
+    description: { type: String },
+    techStack: { type: [String], default: [] },
+  },
+  { _id: false }
+);
+
+const ResumeSchema = new mongoose.Schema<IResume>(
+  {
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: collections.USER_COLLECTION,
+      required: true,
+      index: true,
+    },
+    fileKey: { type: String, default:"" }, // S3 object key for the resume PDF
+    publicUrl: { type: String, default:"" }, // Public URL for the resume PDF
+    name: { type: String, required: true },
+    phNumber: { type: String, required: true },
+    emailId: { type: String, required: true },
+    portfolioLink: { type: String },
+    linkedinLink: { type: String },
+    githubLink: { type: String },
+    summary: { type: String },
+    skills: { type: [String], default: [] },
+    projectName: { type: [ProjectSchema], default: [] },
+    education: { type: [EducationSchema], default: [] },
+    experience: { type: [ExperienceSchema], default: [] },
+  },
+  { timestamps: true }
+);
+
+class ResumeModel extends Models {
+  constructor() {
+    super(collections.RESUME_COLLECTION, ResumeSchema);
+  }
+}
+
+export default new ResumeModel();

@@ -2,8 +2,9 @@
 import * as http from "./http";
 import * as commonUnit from "./commonUnit";
 import * as cacheConstant from "./cacheConstant";
-import * as appConstant from "./appConstant";;
+import * as appConstant from "./appConstant";
 import * as jwtOperation from "./jwtOperation";
+import * as jobConveter from "./jobConveter";
 
 export default {
   http,
@@ -11,4 +12,5 @@ export default {
   cacheConstant,
   appConstant,
   jwtOperation,
+  jobConveter,
 };
