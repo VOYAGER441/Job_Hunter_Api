@@ -37,10 +37,23 @@ export enum PLAN_CREDITS {
 // ####################### order ########################
 
 export enum ORDER_STATUS {
-   PENDING = "pending",
-   COMPLETED = "completed",
+   CREATED = "created",
+   PAID = "paid",
    FAILED = "failed",
    CANCELLED = "cancelled"
+}
+
+export enum PAYMENT_STATUS {
+   PENDING = "pending",
+   SUCCESS = "success",
+   FAILED = "failed",
+   REFUNDED = "refunded"
+}
+
+export enum INVOICE_STATUS {
+   GENERATED = "generated",
+   SENT = "sent",
+   FAILED = "failed"
 }
 
 // ####################### job source ########################

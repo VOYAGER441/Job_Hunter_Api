@@ -49,3 +49,19 @@ export const FINDWORK_API_URL = process.env.FINDWORK_API_URL;
 export const ADZUNA_APP_ID = process.env.ADZUNA_APP_ID
 export const ADZUNA_API_KEY = process.env.ADZUNA_API_KEY
 export const FINDWORK_API_KEY = process.env.FINDWORK_API_KEY
+
+// Razorpay
+export const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID
+export const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET
+export const RAZORPAY_WEBHOOK_SECRET = process.env.RAZORPAY_WEBHOOK_SECRET
+
+// Mailtrap
+export const MAILTRAP_SMTP_HOST = process.env.MAILTRAP_SMTP_HOST
+export const MAILTRAP_SMTP_PORT = process.env.MAILTRAP_SMTP_PORT
+export const MAILTRAP_SMTP_USER = process.env.MAILTRAP_SMTP_USER
+export const MAILTRAP_SMTP_PASS = process.env.MAILTRAP_SMTP_PASS
+export const MAILTRAP_FROM_EMAIL = process.env.MAILTRAP_FROM_EMAIL
+export const MAILTRAP_ACCOUNT_OWNER_EMAIL = process.env.MAILTRAP_ACCOUNT_OWNER_EMAIL
+
+// Internal service token
+export const INVOICE_SERVICE_INTERNAL_TOKEN = process.env.INVOICE_SERVICE_INTERNAL_TOKEN
